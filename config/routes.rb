@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resource :session, except: %i[ new ]
   get "login", to: "sessions#new", as: :new_session
+  # post "login", to: "sessions#create", as: :session
 
   # resources :registrations, only: %i[new create]
   get "signup", to: "registrations#new", as: :signup

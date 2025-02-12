@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  include Authentication
   before_action :set_book, only: %i[ show edit update destroy ]
 
   # GET /books or /books.json
@@ -67,4 +68,6 @@ class BooksController < ApplicationController
     def book_params
       params.expect(book: [ :title, :author, :isbn, :available ])
     end
+
+    
 end

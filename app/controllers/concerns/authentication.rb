@@ -13,6 +13,17 @@ module Authentication
   end
 
   private
+
+    def authenticated_user!
+      unless user_signed_in?
+        redirect_to new_session_path, alert: "You must be logged in to access that page."
+      end
+    end
+
+    def user_signed_in?
+      Current.session ||= find_session_by_cookie
+    end
+
     def authenticated?
       resume_session
     end

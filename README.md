@@ -1,24 +1,108 @@
-# README
+# Rails 8 Application Setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prerequisites
+Before running the application, ensure you have the following installed:
 
-Things you may want to cover:
+- **Ruby** (Recommended: 3.2 or later) – Check version:
+  ```sh
+  ruby -v
+  ```
+- **Rails 8** – Check version:
+  ```sh
+  rails -v
+  ```
+- **Bundler** – Install or check version:
+  ```sh
+  gem install bundler
+  bundler -v
+  ```
+- **Node.js & Yarn** (For JavaScript dependencies)
+  ```sh
+  node -v  # Check Node.js version
+  yarn -v  # Check Yarn version
+  ```
+- **Database** (PostgreSQL, MySQL, or SQLite depending on your app setup)
+  ```sh
+  psql --version  # PostgreSQL
+  mysql --version # MySQL
+  ```
 
-* Ruby version
+## Installation Steps
+1. **Clone the repository:**
+   ```sh
+   git clone <your-repository-url>
+   cd <your-project-name>
+   ```
 
-* System dependencies
+2. **Install dependencies:**
+   ```sh
+   bundle install
+   yarn install  # If using Yarn for JS dependencies
+   ```
 
-* Configuration
+3. **Set up the database:**
+   ```sh
+   rails db:create
+   rails db:migrate
+   rails db:seed # (Optional: If you have seed data)
+   ```
 
-* Database creation
+4. **Run the application:**
+   ```sh
+   rails s
+   ```
+   The application should now be running at **http://localhost:3000**.
 
-* Database initialization
+## Additional Setup
+### TailwindCSS (If Installed)
+If using TailwindCSS, ensure it’s correctly installed:
+```sh
+rails tailwindcss:build
+```
 
-* How to run the test suite
+### Running Background Jobs (If Using Sidekiq)
+```sh
+bundle exec sidekiq
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Running Tests
+To run tests:
+```sh
+rails test  # For Minitest
+rspec      # For RSpec
+```
 
-* Deployment instructions
+### Linting & Code Quality
+```sh
+rubocop
+```
 
-* ...
+## Deployment
+For production deployment:
+```sh
+RAILS_ENV=production rails assets:precompile
+RAILS_ENV=production rails db:migrate
+```
+
+## Troubleshooting
+If you encounter issues, try:
+```sh
+bundle update
+rails tmp:cache:clear
+rails restart
+```
+
+For logs:
+```sh
+tail -f log/development.log
+```
+
+## Contributing
+- Fork the repo
+- Create a new branch (`git checkout -b feature-branch`)
+- Make changes and commit (`git commit -m "Your message"`)
+- Push changes (`git push origin feature-branch`)
+- Open a pull request
+
+## License
+This project is licensed under the MIT License.
