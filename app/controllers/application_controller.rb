@@ -1,9 +1,12 @@
 class ApplicationController < ActionController::Base
-  include Authentication
-  # before_action: set_layout
+  # include Authentication
+  before_action :require_login
 
-  # def set_layout
-    # if @layout = user_signed_in? ? "application" : "authentication"
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  layout :set_layout
+
+  private
+
+  def set_layout
+    controller_name == "sessions" || controller_name == "registrations" ? "auth" : "application"
+  end
 end

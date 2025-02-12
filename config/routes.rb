@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resource :session
-  resources :registrations, only: %i[new create]
+  resource :session, except: %i[ new ]
+  get "login", to: "sessions#new", as: :new_session
+
+  # resources :registrations, only: %i[new create]
+  get "signup", to: "registrations#new", as: :signup
+  post "signup", to: "registrations#create", as: :register
   resources :passwords, param: :token
   resources :books
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

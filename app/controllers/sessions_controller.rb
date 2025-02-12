@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
-  allow_unauthenticated_access only: %i[ new create ]
+  skip_before_action :require_login, only: %i[new create] # Allow access to login
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_url, alert: "Try again later." }
+
+  layout "authentication"
 
   def new
   end

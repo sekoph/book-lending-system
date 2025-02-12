@@ -1,7 +1,10 @@
 class RegistrationsController < ApplicationController
-    allow_unauthenticated_access
+    # allow_unauthenticated_access
+    skip_before_action :require_login, only: %i[new create] # Allow access to signup
+    layout "authentication"
 
     def new
+        # redirect_to root_path if authenticated?
         @user = User.new
     end
 
