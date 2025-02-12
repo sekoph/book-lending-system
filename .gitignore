@@ -35,3 +35,10 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# RSpec-specific files
+/spec/examples.txt
+/spec/tmp/
+/coverage/
+/.rspec_status
+
