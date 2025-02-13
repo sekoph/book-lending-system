@@ -41,22 +41,6 @@ class BorrowsController < ApplicationController
     end
   end
 
-  # def create
-  #   # @borrow = Borrow.new(borrow_params)
-  #   # @borrow.borrowed_at = Time.current
-  #   # @borrow.returned_at ||= @borrow.borrowed_at + 2.weeks
-
-  #   # respond_to do |format|
-  #   #   if @borrow.save
-  #   #     format.html { redirect_to @borrow, notice: "Borrow was successfully created." }
-  #   #     format.json { render :show, status: :created, location: @borrow }
-  #   #   else
-  #   #     format.html { render :new, status: :unprocessable_entity }
-  #   #     format.json { render json: @borrow.errors, status: :unprocessable_entity }
-  #   #   end
-  #   # end
-  # end
-
   # PATCH/PUT /borrows/1 or /borrows/1.json
   def update
     respond_to do |format|

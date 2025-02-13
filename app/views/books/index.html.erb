@@ -15,6 +15,7 @@
                 <th scope="col">Book</th>
                 <th scope="col">ISBN</th>
                 <th scope="col">Borrow</th>
+                <th scope="col">Show More</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,9 @@
                     <% else %>
                     <p><strong>Not Available.</strong></p>
                     <% end %>
+                </td>
+                <td>
+                    <%= link_to "Show this book", book, class: "btn btn-primary" %>
                 </td>
             </tr>
             <% end %>
