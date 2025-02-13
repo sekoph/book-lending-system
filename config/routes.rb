@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resources :books
   resources :borrows, only: [:create]
+  get "home/about"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -21,5 +22,6 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "books#index"
+  # get "home/index"
+  root "home#index"
 end

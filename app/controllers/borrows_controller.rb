@@ -33,11 +33,11 @@ class BorrowsController < ApplicationController
       )
       if @borrow.save
         @book.update(available: false)
-        redirect_to @book, notice: "Borrow was successfully created."
+        redirect_to books_path, notice: "Borrow was successfully created."
       else
         render :new, alert: "Borrow was not created."
       end
-    else redirect_to @book, alert: "Book is not available."
+    else redirect_to books_path, alert: "Book is not available."
     end
   end
 

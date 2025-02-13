@@ -1,39 +1,46 @@
-<div id="<%= dom_id book %>" class="max-w-md mx-auto bg-white shadow-md ">
-  <div class="flex justify-evenly items-center mt-2 px-8 py-4">
-    <div class="">
-      <h2 class="text-lg font-bold text-gray-900">Title:&nbsp&nbsp<%= book.title %></h2>
-    </div>&nbsp&nbsp
-    <div>
-      <% if book.available %>
-      <p><strong><%= Current.user.id%></strong></p>
-      <%= button_to "Borrow", borrows_path(book_id: book.id), method: :post %>
-      <% else %>
-      <p><strong>Not Available.</strong></p>
-      <% end %>
+<p id="notice"><%= notice %></p>
+<div class="container mx-auto px-4 py-16">
+    <div class="flex justify-between items-center">
+        <h1 class="text-4xl font-bold">Borrowed Books</h1>
     </div>
-    
-  </div>
-  <div class="flex justify-between items-center mt-2">
-    <p class="text-gray-700"><strong>By:</strong> <%= book.author %></p>&nbsp&nbsp
-    <p class="text-gray-600"><strong>ISBN:</strong> <%= book.isbn %></p>
-  </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Borrow</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+            <tr>
+                <th scope="row">1</th>
+                <td>
+                    <div class="container">
+                        <div class="col">
+                            <div class="row font-weight-bold">
+                                <%= book.title %>
+                            </div>
+                            <div class="row text-sm text-gray-500 font-italic">
+                                Author:&nbsp<%= book.author %>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td><%= book.isbn %></td>
+                <td>
+                    <% if book.available %>
+                    <%= button_to "Borrow", borrows_path(book_id: book.id), method: :post, class: "btn btn-primary" %>
+                    <% else %>
+                    <p><strong>Not Available.</strong></p>
+                    <% end %>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>
-<%
-=begin%>
- <div class="bg-gray-800 text-white p-4 grid grid-cols-2 gap-4 md:grid-cols-4">
-      <h2 class="text-lg font-bold text-gray-900"><%= book.title %></h2>
-  
-  <div class="flex justify-between items-center mt-2">
-    <p class="text-gray-700"><strong>Author:</strong> <%= book.author %></p>
-    <p class="text-gray-600"><strong>ISBN:</strong> <%= book.isbn %></p>
-  </div>
 
-  <p class="mt-2 text-sm font-medium text-gray-700">
-    <strong>Available:</strong>
-    <span class="<%= book.available ? 'text-green-600' : 'text-red-600' %>">
-      <%= book.available ? 'Yes' : 'No' %>
-    </span>
-  </p>
-  </div> 
-<%
-=end%>

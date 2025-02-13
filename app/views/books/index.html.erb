@@ -2,23 +2,70 @@
 
 <% content_for :title, "Books" %>
 
-<%
-=begin%>
- <h1>Books</h1> 
-<%
-=end%>
-
-<div id="books">
-  <% @books.each do |book| %>
-    <%= render book %>
-    <p>
-      <%= link_to "Show this book", book %>
-    </p>
-  <% end %>
+<%= link_to "New book", new_book_path %>
+<div class="container mx-auto px-4 py-16" id="books">
+    <div class="flex justify-between items-center">
+        <h1 class="text-4xl font-bold">Books Catalog</h1>
+    </div>
+    <% if @books.present? %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Borrow</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @books.each_with_index do |book, index| %>
+            <tr>
+                <th scope="row"><%= (@books.current_page - 1) * @books.limit_value + index + 1 %></th>
+                <td>
+                    <div class="container">
+                        <div class="col">
+                            <div class="row font-weight-bold">
+                                <%= book.title %>
+                            </div>
+                            <div class="row text-sm text-gray-500 font-italic">
+                                Author:&nbsp<%= book.author %>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td><%= book.isbn %></td>
+                <td>
+                    <% if book.available %>
+                    <%= button_to "Borrow", borrows_path(book_id: book.id), method: :post, class: "btn btn-primary" %>
+                    <% else %>
+                    <p><strong>Not Available.</strong></p>
+                    <% end %>
+                </td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+     <!-- Pagination Links -->
+      <div class="pagination mt-4 gap-2">
+        <%= paginate @books %>
+      </div>
+    <% else %>
+    <p class="text-center my-10">No books found.</p>
+    <% end %>
 </div>
 
-<%
+
+
+
+
+
+
+
+
+ <%
 =begin%>
- <%= link_to "New book", new_book_path %> 
+ <p>
+      <%= link_to "Show this book", book %>
+    </p> 
 <%
 =end%>
