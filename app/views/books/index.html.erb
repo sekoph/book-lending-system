@@ -2,7 +2,11 @@
 
 <% content_for :title, "Books" %>
 
-<h1>Books</h1>
+<%
+=begin%>
+ <h1>Books</h1> 
+<%
+=end%>
 
 <div id="books">
   <% @books.each do |book| %>
@@ -13,4 +17,8 @@
   <% end %>
 </div>
 
-<%= link_to "New book", new_book_path %>
+<%
+=begin%>
+ <%= link_to "New book", new_book_path %> 
+<%
+=end%>

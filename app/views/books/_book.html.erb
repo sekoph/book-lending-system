@@ -1,22 +1,39 @@
-<div id="<%= dom_id book %>">
-  <p>
-    <strong>Title:</strong>
-    <%= book.title %>
-  </p>
-
-  <p>
-    <strong>Author:</strong>
-    <%= book.author %>
-  </p>
-
-  <p>
-    <strong>Isbn:</strong>
-    <%= book.isbn %>
-  </p>
-
-  <p>
-    <strong>Available:</strong>
-    <%= book.available %>
-  </p>
-
+<div id="<%= dom_id book %>" class="max-w-md mx-auto bg-white shadow-md ">
+  <div class="flex justify-evenly items-center mt-2 px-8 py-4">
+    <div class="">
+      <h2 class="text-lg font-bold text-gray-900">Title:&nbsp&nbsp<%= book.title %></h2>
+    </div>&nbsp&nbsp
+    <div>
+      <% if book.available %>
+      <p><strong><%= Current.user.id%></strong></p>
+      <%= button_to "Borrow", borrows_path(book_id: book.id), method: :post %>
+      <% else %>
+      <p><strong>Not Available.</strong></p>
+      <% end %>
+    </div>
+    
+  </div>
+  <div class="flex justify-between items-center mt-2">
+    <p class="text-gray-700"><strong>By:</strong> <%= book.author %></p>&nbsp&nbsp
+    <p class="text-gray-600"><strong>ISBN:</strong> <%= book.isbn %></p>
+  </div>
 </div>
+<%
+=begin%>
+ <div class="bg-gray-800 text-white p-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+      <h2 class="text-lg font-bold text-gray-900"><%= book.title %></h2>
+  
+  <div class="flex justify-between items-center mt-2">
+    <p class="text-gray-700"><strong>Author:</strong> <%= book.author %></p>
+    <p class="text-gray-600"><strong>ISBN:</strong> <%= book.isbn %></p>
+  </div>
+
+  <p class="mt-2 text-sm font-medium text-gray-700">
+    <strong>Available:</strong>
+    <span class="<%= book.available ? 'text-green-600' : 'text-red-600' %>">
+      <%= book.available ? 'Yes' : 'No' %>
+    </span>
+  </p>
+  </div> 
+<%
+=end%>

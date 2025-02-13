@@ -20,7 +20,7 @@ class RegistrationsController < ApplicationController
     end
 
     private
-    def redirect_if_authenticated
-      redirect_to root_path if authenticated?
+    def user_params
+      params.require(:user).permit(:email_address, :password, :password_confirmation)
     end
 end

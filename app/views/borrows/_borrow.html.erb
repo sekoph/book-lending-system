@@ -1,0 +1,22 @@
+<div id="<%= dom_id borrow %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= borrow.user_id %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Book:</strong>
+    <%= borrow.book_id %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Borrowed at:</strong>
+    <%= borrow.borrowed_at %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Returned at:</strong>
+    <%= borrow.returned_at %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= borrow.status %>
+  </p>
+</div>
