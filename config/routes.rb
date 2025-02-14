@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   post "signup", to: "registrations#create", as: :register
   resources :passwords, param: :token
   resources :books
-  resources :borrows, only: [:create] do
+  resources :borrows, only: [ :create ] do
     member do
       put :return_book
     end
   end
-  
+
   get "home/about"
   get "admin/about"
   get "admin/borrowed_books"

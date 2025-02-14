@@ -1,8 +1,7 @@
 class BooksController < ApplicationController
   include Authentication
   before_action :set_book, only: %i[ show edit update destroy ]
-  allow_unauthenticated_access only: [:create, :update]
-
+  allow_unauthenticated_access only: [ :create, :update ]
 
   # GET /books or /books.json
   def index
@@ -71,6 +70,4 @@ class BooksController < ApplicationController
     def book_params
       params.expect(book: [ :title, :author, :isbn, :available ])
     end
-
-    
 end

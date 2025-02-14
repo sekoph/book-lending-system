@@ -45,7 +45,6 @@ class BorrowsController < ApplicationController
 
   def return_book
     @borrow = Borrow.find_by(id: params[:id])
-  
     if @borrow
       @borrow.update(returned_at: Time.current, status: "returned")
       @book = @borrow.book

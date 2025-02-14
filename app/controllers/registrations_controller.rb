@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-    allow_unauthenticated_access only: [:new, :create]
+    allow_unauthenticated_access only: [ :new, :create ]
     layout "authentication"
 
     def new
@@ -15,7 +15,7 @@ class RegistrationsController < ApplicationController
           redirect_to after_authentication_url
         else
           flash[:error] = "Something went wrong"
-          render 'new'
+          render "new"
         end
     end
 

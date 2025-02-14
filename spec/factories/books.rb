@@ -6,4 +6,3 @@ FactoryBot.define do
       available { true }
     end
   end
-  
