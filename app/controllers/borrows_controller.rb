@@ -28,8 +28,9 @@ class BorrowsController < ApplicationController
         user_id: Current.user.id,
         book_id: @book.id,
         borrowed_at: Time.current,
-        returned_at: Time.current + 2.weeks,
-        status: "borrowed"
+        returned_at: nil,
+        status: "borrowed",
+        due_date: Time.current + 2.weeks
       )
       if @borrow.save
         @book.update(available: false)
@@ -37,7 +38,26 @@ class BorrowsController < ApplicationController
       else
         render :new, alert: "Borrow was not created."
       end
-    else redirect_to books_path, alert: "Book is not available."
+    else
+      redirect_to books_path, alert: "Book is not available."
+    end
+  end
+
+  def return_book
+    @borrow = Borrow.find(params[:id])
+
+  
+    if @borrow
+
+      @borrow.update(returned_at: Time.current, status: "returned")
+
+      @book = Book.find(@borrow.book_id)
+      @book.update(available: true)
+      redirect_to borrows_path, notice: "#{@borrow.book.title} was successfully returned."
+
+  
+    else
+      redirect_to borrows_path, alert: "Not Returned."
     end
   end
 

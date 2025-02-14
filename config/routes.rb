@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   post "signup", to: "registrations#create", as: :register
   resources :passwords, param: :token
   resources :books
-  resources :borrows, only: [:create]
+  resources :borrows, only: [:create] do
+    member do
+      post :return_book
+    end
+  end
+  
   get "home/about"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

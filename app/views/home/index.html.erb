@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="container mx-auto px-4 py-16">
     <div class="flex justify-between items-center">
-      <h1 class="text-4xl font-bold">Borrowed Books</h1>
+        <h1 class="text-4xl font-bold">Borrowed Books</h1>
     </div>
     <% if @borrowed_book.present? %>
     <table class="table">
@@ -15,31 +15,34 @@
             </tr>
         </thead>
         <tbody>
-            <% @borrowed_book.each_with_index do |book, index| %>
-                <tr>
-                    <th scope="row"><%= (@borrowed_book.current_page - 1) * @borrowed_book.limit_value + index + 1 %></th>
-                    <td>
-                        <div class="container">
-                            <div class="col">
-                                <div class="row font-weight-bold">
-                                    <%= book.title %>
-                                </div>
-                                <div class="row text-sm text-gray-500 font-italic">
-                                    Author:&nbsp<%= book.author %>
-                                </div>
+            <% @borrowed_book.each_with_index do |borrow, index| %>
+            <tr>
+                <th scope="row"><%= (@borrowed_book.current_page - 1) * @borrowed_book.limit_value + index + 1 %></th>
+                <td>
+                    <div class="container">
+                        <div class="col">
+                            <div class="row font-weight-bold">
+                                <%= borrow.title %>
+                            </div>
+                            <div class="row text-sm text-gray-500 font-italic">
+                                Author:&nbsp<%= borrow.author %>
                             </div>
                         </div>
-                    </td>
-                    <td><%= book.isbn %></td>
-                    <td><%= book.returned_at%></td>
-                </tr>
+                    </div>
+                </td>
+                <td><%= borrow.isbn %></td>
+                <td><%= borrow.due_date%></td>
+                <td>
+                    <%= button_to "Return Book", return_book_borrow_path(borrow.id), method: :post, class: "btn btn-primary" %>
+                </td>
+            </tr>
             <% end %>
         </tbody>
     </table>
     <!-- Pagination Links -->
-      <div class="pagination mt-4 gap-2">
+    <div class="pagination mt-4 gap-2">
         <%= paginate @borrowed_book %>
-      </div>
+    </div>
     <% else %>
     <p>No borrowed books found.</p>
     <% end %>
