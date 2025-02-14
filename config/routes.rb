@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :books
   resources :borrows, only: [:create] do
     member do
-      post :return_book
+      put :return_book
     end
   end
   

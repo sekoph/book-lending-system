@@ -5,4 +5,8 @@ class Borrow < ApplicationRecord
   validates :borrowed_at, presence:true
   validates :status, inclusion: {in: %w[borrowed returned overdue]}
   validates :due_date, presence: true
+
+  def return_book?
+    status == "returned"
+  end
 end

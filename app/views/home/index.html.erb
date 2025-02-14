@@ -33,7 +33,7 @@
                 <td><%= borrow.isbn %></td>
                 <td><%= borrow.due_date%></td>
                 <td>
-                    <%= button_to "Return Book", return_book_borrow_path(borrow.id), method: :post, class: "btn btn-primary" %>
+                    <%= button_to "Return Book", return_book_borrow_path(borrow.id), method: :put, class: "btn btn-primary" %>
                 </td>
             </tr>
             <% end %>

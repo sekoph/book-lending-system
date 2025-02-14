@@ -44,18 +44,13 @@ class BorrowsController < ApplicationController
   end
 
   def return_book
-    @borrow = Borrow.find(params[:id])
-
+    @borrow = Borrow.find_by(id: params[:id])
   
     if @borrow
-
       @borrow.update(returned_at: Time.current, status: "returned")
-
-      @book = Book.find(@borrow.book_id)
+      @book = @borrow.book
       @book.update(available: true)
       redirect_to borrows_path, notice: "#{@borrow.book.title} was successfully returned."
-
-  
     else
       redirect_to borrows_path, alert: "Not Returned."
     end

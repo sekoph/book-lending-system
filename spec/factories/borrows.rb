@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :borrow do
-    user { nil }
-    book { nil }
+    user
+    book
     borrowed_at { "2025-02-12 22:40:49" }
     returned_at { "2025-02-12 22:40:49" }
-    status { "MyString" }
+    due_date { "2025-02-12 22:40:49" }
+    status { "borrowed" }
   end
 end
