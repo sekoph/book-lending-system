@@ -1,0 +1,14 @@
+<% if notice %>
+<p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-4 fw-bold">Book Details</h1>
+    </div>
+
+    <%= render "admin/book", book: @book %>
+    <%= link_to "Edit this book", edit_admin_path(@book), class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %> &nbsp|
+    <%= link_to "Go Back", admin_index_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+
+</div>

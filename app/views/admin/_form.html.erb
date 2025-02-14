@@ -1,0 +1,36 @@
+<%= form_with(model: book, class: "container mt-4 p-4 border rounded shadow-sm") do |form| %>
+  <% if book.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h4>
+      <ul class="mb-0">
+        <% book.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Enter book title" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :author, class: "form-label" %>
+    <%= form.text_field :author, class: "form-control", placeholder: "Enter author's name" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :isbn, class: "form-label" %>
+    <%= form.text_field :isbn, class: "form-control", placeholder: "Enter ISBN number" %>
+  </div>
+
+  <div class="form-check mb-3">
+    <%= form.check_box :available, class: "form-check-input" %>
+    <%= form.label :available, class: "form-check-label" %>
+  </div>
+
+  <div>
+    <%= form.submit "Save Book", class: "btn btn-primary w-100" %>
+  </div>
+<% end %>

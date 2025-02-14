@@ -10,7 +10,7 @@
       <%= notice %>
     </div>
   <% end %>
-
+    Access Admin Dashboard to Add Books <%= link_to "Admin Dashboard", new_admin_path, class: "btn btn-primary" %>
   <h1 class="fw-bold display-4">Sign up</h1>
   
   <%= form_with model: @user, url: signup_path, class: "mt-4" do |form| %>

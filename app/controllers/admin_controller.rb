@@ -1,13 +1,21 @@
-class BooksController < ApplicationController
+class AdminController < ApplicationController
   include Authentication
   before_action :set_book, only: %i[ show edit update destroy ]
-  allow_unauthenticated_access only: [:create, :update]
-
-
-  # GET /books or /books.json
+  allow_unauthenticated_access only: %i[index edit new show about borrowed_books]
+  layout "admin_dashboard"
   def index
-    # @books = Book.all
     @books = Book.page(params[:page]).per(5)
+  end
+
+  def about
+  end
+
+  def borrowed_books
+    @borrowed_book = Borrow.joins(:book)
+                            .where(status: "borrowed")
+                            .select("borrows.id, borrows.borrowed_at,borrows.due_date, borrows.status, books.title, books.author, books.isbn, books.available")
+                            .page(params[:page])
+                            .per(5)
   end
 
   # GET /books/1 or /books/1.json
@@ -29,7 +37,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to admin_index_path, notice: "Book was successfully created." }
+        format.html { redirect_to admins_path, notice: "Book was successfully created." }
         # format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,8 +50,8 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to admin_index_path, notice: "Book was successfully updated." }
-        # format.json { render :show, status: :ok, location: @book }
+        format.html { redirect_to @book, notice: "Book was successfully updated." }
+        format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @book.errors, status: :unprocessable_entity }
@@ -71,6 +79,4 @@ class BooksController < ApplicationController
     def book_params
       params.expect(book: [ :title, :author, :isbn, :available ])
     end
-
-    
 end

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+<div class="container mx-auto px-4 py-16">
+    <div class="flex justify-between items-center">
+        <h1 class="text-4xl font-bold">Borrowed Books</h1>
+    </div>
+    <% if @borrowed_book.present? %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Book</th>
+                <th scope="col">ISBN</th>
+                <th scope="col">Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @borrowed_book.each_with_index do |borrow, index| %>
+            <tr>
+                <th scope="row"><%= (@borrowed_book.current_page - 1) * @borrowed_book.limit_value + index + 1 %></th>
+                <td>
+                    <div class="container">
+                        <div class="col">
+                            <div class="row font-weight-bold">
+                                <%= borrow.title %>
+                            </div>
+                            <div class="row text-sm text-gray-500 font-italic">
+                                Author:&nbsp<%= borrow.author %>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td><%= borrow.isbn %></td>
+                <td><%= borrow.due_date%></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <!-- Pagination Links -->
+    <div class="pagination mt-4 gap-2">
+        <%= paginate @borrowed_book %>
+    </div>
+    <% else %>
+    <p>No borrowed books found.</p>
+    <% end %>
+</div>

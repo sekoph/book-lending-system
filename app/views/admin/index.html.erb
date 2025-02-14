@@ -13,12 +13,11 @@
                 <th scope="col">#</th>
                 <th scope="col">Book</th>
                 <th scope="col">ISBN</th>
-                <th scope="col">Borrow</th>
                 <th scope="col">Show More</th>
             </tr>
         </thead>
         <tbody>
-            <% @books.each_with_index do |book, index| %>
+          <% @books.each_with_index do |book, index| %>
             <tr>
                 <th scope="row"><%= (@books.current_page - 1) * @books.limit_value + index + 1 %></th>
                 <td>
@@ -35,24 +34,16 @@
                 </td>
                 <td><%= book.isbn %></td>
                 <td>
-                    <% if book.available %>
-                    <%= button_to "Borrow", borrows_path(book_id: book.id), method: :post, class: "btn btn-primary" %>
-                    <% else %>
-                    <p><strong>Not Available.</strong></p>
-                    <% end %>
-                </td>
-                <td>
-                    <%= link_to "Show this book", book, class: "btn btn-primary" %>
+                    <%= link_to "Show this book", admin_path(book.id), class: "btn btn-primary" %>
                 </td>
             </tr>
             <% end %>
         </tbody>
     </table>
-    <!-- Pagination Links -->
-    <div class="d-flex justify-content-center mt-4">
-        <%= paginate @books, class: "pagination pagination-lg gap-2 px-4" %>
-    </div>
-
+     <!-- Pagination Links -->
+      <div class="pagination mt-4 gap-2">
+        <%= paginate @books %>
+      </div>
     <% else %>
     <p class="text-center my-10">No books found.</p>
     <% end %>
