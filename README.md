@@ -1,4 +1,5 @@
-# Rails 8 Application Setup
+# Book Lending System
+This is a Ruby on Rails application for managing book lending and user management.
 
 ## Prerequisites
 Before running the application, ensure you have the following installed:
@@ -22,29 +23,23 @@ Before running the application, ensure you have the following installed:
   yarn -v  # Check Yarn version
   ```
 - **Database** (PostgreSQL, MySQL, or SQLite depending on your app setup)
-  ```sh
-  psql --version  # PostgreSQL
-  mysql --version # MySQL
-  ```
+  - Default: SQLite (config/database.yml)
 
 ## Installation Steps
 1. **Clone the repository:**
    ```sh
-   git clone <your-repository-url>
-   cd <your-project-name>
+   git clone https://github.com/sekoph/book-lending-system.git
+   cd book-lending-system
    ```
 
 2. **Install dependencies:**
    ```sh
    bundle install
-   yarn install  # If using Yarn for JS dependencies
    ```
 
 3. **Set up the database:**
    ```sh
-   rails db:create
    rails db:migrate
-   rails db:seed # (Optional: If you have seed data)
    ```
 
 4. **Run the application:**
@@ -52,36 +47,19 @@ Before running the application, ensure you have the following installed:
    rails s
    ```
    The application should now be running at **http://localhost:3000**.
+   To login as user, Credentials:
+   - Email: user@gmail.com
+   - Password: user
+  Or you can register as a new user.
 
-## Additional Setup
-### TailwindCSS (If Installed)
-If using TailwindCSS, ensure it’s correctly installed:
-```sh
-rails tailwindcss:build
-```
+  To Add a new book, click on the "Admin Dashboard" button on the login or signup page.
 
-### Running Background Jobs (If Using Sidekiq)
-```sh
-bundle exec sidekiq
-```
 
-### Running Tests
+
+### Running Tests For models
 To run tests:
 ```sh
-rails test  # For Minitest
-rspec      # For RSpec
-```
-
-### Linting & Code Quality
-```sh
-rubocop
-```
-
-## Deployment
-For production deployment:
-```sh
-RAILS_ENV=production rails assets:precompile
-RAILS_ENV=production rails db:migrate
+rspec  spec/models
 ```
 
 ## Troubleshooting
@@ -91,18 +69,6 @@ bundle update
 rails tmp:cache:clear
 rails restart
 ```
-
-For logs:
-```sh
-tail -f log/development.log
-```
-
-## Contributing
-- Fork the repo
-- Create a new branch (`git checkout -b feature-branch`)
-- Make changes and commit (`git commit -m "Your message"`)
-- Push changes (`git push origin feature-branch`)
-- Open a pull request
 
 ## License
 This project is licensed under the MIT License.
