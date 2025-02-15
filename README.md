@@ -59,7 +59,7 @@ Before running the application, ensure you have the following installed:
 ### Running Tests For models
 To run tests:
 ```sh
-rspec  spec/models
+rspec  spec
 ```
 
 ## Troubleshooting
